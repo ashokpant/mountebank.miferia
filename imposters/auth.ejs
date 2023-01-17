@@ -1,0 +1,54 @@
+{
+    "protocol": "grpc",
+    "port": 2572,
+    "loglevel": "debug",
+    "recordRequests": true,
+    "services": {
+        "miferia.rpc.auth.AuthRpc": {
+            "file": "src/auth/auth_rpc.proto"
+        }
+    },
+    "options": {
+        "protobufjs": {
+            "includeDirs": [
+                "/app/proto.miferia",
+                "/app/proto.miferia/src"
+            ]
+        }
+    },
+    "stubs": [
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "authorize"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "authorized": true,
+                            "granted": true,
+                            "session": {
+                                "sessionId":"session-id-1",
+                                "user":{
+                                    "userId":"user-id-1",
+                                    "firstName": "Ashok",
+                                    "lastName": "Pant"
+                                },
+                                "business":{
+                                        "businessId": "business-id-1",
+                                        "businessName": "Ashok LLC"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "callbackURLTemplate": "http://localhost:2525/imposters/:port/_requests"
+}

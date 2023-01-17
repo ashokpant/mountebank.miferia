@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  mountebank.miferia:
+    container_name: mountebank.miferia
+    build:
+      context: .
+      args:
+        - GIT_TOKEN=$GIT_TOKEN
+    image: mountebank.miferia
+    volumes:
+      - ./imposters:/imposters
+    restart: always
+    networks:
+      - miferia
+    command:  ["start",  "--protofile", "/app/protocols.json", "--configfile", "/imposters/imposters.ejs", "--allowInjection", "true", "--loglevel", "debug", "--cors", "--ipWhitelist", "*"]
+    ports:
+      - 2525:2525
+      - 2572:2572
+      - 2571:2571
+      - 2562:2562
+volumes:
+  imposters: { }
+networks:
+  miferia:
+    driver: bridge

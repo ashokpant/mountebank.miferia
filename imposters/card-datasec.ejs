@@ -1,0 +1,48 @@
+{
+    "protocol": "grpc",
+    "port": 2562,
+    "loglevel": "debug",
+    "recordRequests": true,
+    "services": {
+        "miferia.rpc.card.datasec.CardDataSecRpc": {
+            "file": "src/carddatasec/card_datasec_rpc.proto"
+        }
+    },
+    "options": {
+        "protobufjs": {
+            "includeDirs": [
+            "/app/proto.card",
+            "/app/proto.card/src"
+            ]
+        }
+    },
+    "stubs": [
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_saveCardNumber"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": "false",
+                            "success": "true",
+                            "cardId":"card-id-1"
+                        }
+                    },
+                    "behaviors": [
+                    {
+                      "decorate": "(config) => {config.response.value.cardId = config.request.value.cardId;}"
+                    }
+                  ]
+                }
+            ]
+        }
+    ],
+    "callbackURLTemplate": "http://localhost:2525/imposters/:port/_requests"
+}
