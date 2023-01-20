@@ -18,6 +18,7 @@ proto.card| card.ejs|    2561
 proto.card| card-datasec.ejs| 2562
 proto.miferia| card-security.ejs| 2571
 proto.miferia| auth.ejs| 2572
+proto.miferia| address.ejs| 2573
 |||
 
 ## Build mountebank docker image without imposters

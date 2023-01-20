@@ -1,0 +1,93 @@
+{
+    "protocol": "grpc",
+    "port": 2573,
+    "loglevel": "debug",
+    "recordRequests": true,
+    "services": {
+        "miferia.rpc.address.AddressRpc": {
+            "file": "src/address/address_rpc.proto"
+        }
+    },
+    "options": {
+        "protobufjs": {
+            "includeDirs": [
+                "/app/proto.miferia",
+                "/app/proto.miferia/src"
+            ]
+        }
+    },
+    "stubs": [
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_saveAddress"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true,
+                            "address": {
+                                    "addressId": "addressId",
+                                    "type": "CARD",
+                                    "city": "Kathmandu",
+                                    "state": "Provice 3",
+                                    "country": "Nepal",
+                                    "line1": "Kathmandu-32",
+                                    "zipCode": "44600",
+                                    "refId": "refId",
+                                    "refIdType": "card",
+                                    "tag": "personal",
+                                    "createdAt": "2023-01-20T13:24:22.073582301"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_getAddress"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true,
+                            "address": {
+                                    "addressId": "addressId",
+                                    "type": "CARD",
+                                    "city": "Kathmandu",
+                                    "state": "Provice 3",
+                                    "country": "Nepal",
+                                    "line1": "Kathmandu-32",
+                                    "zipCode": "44600",
+                                    "refId": "refId",
+                                    "refIdType": "card",
+                                    "tag": "personal",
+                                    "createdAt": "2023-01-20T13:24:22.073582301"
+                            }
+                        }
+                    },
+                    "behaviors": [
+                    {
+                      "decorate": "(config) => {config.response.value.addressId = config.request.value.addressId;}"
+                    }
+                  ]
+                }
+            ]
+        }
+    ],
+    "callbackURLTemplate": "http://localhost:2525/imposters/:port/_requests"
+}

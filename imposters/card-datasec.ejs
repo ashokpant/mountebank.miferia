@@ -30,8 +30,8 @@
                 {
                     "is": {
                         "value": {
-                            "error": "false",
-                            "success": "true",
+                            "error": false,
+                            "success": true,
                             "cardId":"card-id-1"
                         }
                     },
@@ -40,6 +40,53 @@
                       "decorate": "(config) => {config.response.value.cardId = config.request.value.cardId;}"
                     }
                   ]
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_getCardNumber"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true,
+                            "cardId":"card-id-1",
+                            "rawCardNumber":"1234567890123456"
+                        }
+                    },
+                    "behaviors": [
+                    {
+                      "decorate": "(config) => {config.response.value.cardId = config.request.value.cardId;}"
+                    }
+                  ]
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_deleteCardNumber"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true
+                        }
+                    }
                 }
             ]
         }
