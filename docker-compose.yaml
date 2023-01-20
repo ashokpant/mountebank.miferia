@@ -15,9 +15,11 @@ services:
     command:  ["start",  "--protofile", "/app/protocols.json", "--configfile", "/imposters/imposters.ejs", "--allowInjection", "true", "--loglevel", "debug", "--cors", "--ipWhitelist", "*"]
     ports:
       - 2525:2525
-      - 2572:2572
-      - 2571:2571
       - 2562:2562
+      - 2571:2571
+      - 2572:2572
+      - 2573:2573
+
 volumes:
   imposters: { }
 networks:
