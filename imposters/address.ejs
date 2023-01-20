@@ -46,7 +46,12 @@
                                     "createdAt": "2023-01-20T13:24:22.073582301"
                             }
                         }
+                    },
+                    "behaviors": [
+                    {
+                      "decorate": "(config) => {config.response.value.address.addressId = config.request.value.address.addressId;config.response.value.address.refId = config.request.value.address.refId;}"
                     }
+                  ]
                 }
             ]
         },
@@ -82,9 +87,29 @@
                     },
                     "behaviors": [
                     {
-                      "decorate": "(config) => {config.response.value.addressId = config.request.value.addressId;}"
+                      "decorate": "(config) => {config.response.value.address.addressId = config.request.value.addressId;}"
                     }
                   ]
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_deleteAddress"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true
+                        }
+                    }
                 }
             ]
         }
