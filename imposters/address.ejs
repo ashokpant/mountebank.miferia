@@ -71,14 +71,14 @@
                             "error": false,
                             "success": true,
                             "address": {
-                                    "addressId": "addressId",
+                                    "addressId": "addressId-1",
                                     "type": "CARD",
                                     "city": "Kathmandu",
                                     "state": "Provice 3",
                                     "country": "Nepal",
                                     "line1": "Kathmandu-32",
                                     "zipCode": "44600",
-                                    "refId": "refId",
+                                    "refId": "refId-1",
                                     "refIdType": "card",
                                     "tag": "personal",
                                     "createdAt": "2023-01-20T13:24:22.073582301"
@@ -87,7 +87,7 @@
                     },
                     "behaviors": [
                     {
-                      "decorate": "(config) => {config.response.value.address.addressId = config.request.value.addressId;}"
+                      "decorate": "(config) => {if (config.request.value.addressId != null && config.request.value.addressId != '') {config.response.value.address.addressId = config.request.value.addressId;}}"
                     }
                   ]
                 }

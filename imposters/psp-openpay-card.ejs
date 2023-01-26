@@ -1,0 +1,139 @@
+{
+    "protocol": "grpc",
+    "port": 2590,
+    "loglevel": "debug",
+    "recordRequests": true,
+    "services": {
+        "miferia.rpc.openpay.card.OpenPayCardRpc": {
+            "file": "src/openpay/card/openpay_card_rpc.proto"
+        }
+    },
+    "options": {
+        "protobufjs": {
+            "includeDirs": [
+            "/app/proto.openpay",
+            "/app/proto.openpay/src"
+            ]
+        }
+    },
+    "stubs": [
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_createCardToken"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true,
+                            "card": {
+                                "cardId": "card-id-1",
+                                "nameOnCard": "Ashok Kumar Pant",
+                                "cardExpiryDate": "2023-02-01",
+                                "last4": "5100",
+                                "bin": "510510",
+                                "type": "DEBIT_CARD",
+                                "brand": "MASTERCARD",
+                                "cardStatus": "ACTIVE_CARD",
+                                "paymentProcessor": "OPENPAY",
+                                "businessId": "business-id-1",
+                                "address": {
+                                    "city": "Kathmandu",
+                                    "state": "Provice 3",
+                                    "country": "MX",
+                                    "line1": "address line 1",
+                                    "zipCode": "12345"
+                                },
+                                "token": "k0z1re2dgcighmdbubzb",
+                                "bankName": "SCOTIABANK",
+                                "bankCode": "044"
+                            }
+                        },
+                        "behaviors": [
+                        {
+                          "decorate": "(config) => {config.response.value.card.cardId = config.request.value.card.cardId;config.response.value.card.nameOnCard = config.request.value.card.nameOnCard;config.response.value.card.expiryDate = config.request.value.card.expiryDate;config.response.value.card.brand = config.request.value.card.brand;config.response.value.card.type = config.request.value.card.type;config.response.value.card.country = config.request.value.card.country;}"
+                        }
+                      ]
+                    }
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_getCardToken"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true,
+                            "card": {
+                                "cardId": "card-id-1",
+                                "businessId": "business-id-1",
+                                "token": "k0z1re2dgcighmdbubzb"
+                            }
+                        }
+                    },
+                    "behaviors": [
+                    {
+                      "decorate": "(config) => {config.response.value.card.cardId = config.request.value.cardId;}"
+                    }
+                  ]
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_deleteCardToken"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "predicates": [
+                {
+                    "matches": {
+                        "path": "internal_updateCardToken"
+                    },
+                    "caseSensitive": false
+                }
+            ],
+            "responses": [
+                {
+                    "is": {
+                        "value": {
+                            "error": false,
+                            "success": true
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "callbackURLTemplate": "http://localhost:2525/imposters/:port/_requests"
+}
